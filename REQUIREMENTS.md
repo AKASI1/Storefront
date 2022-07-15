@@ -5,34 +5,45 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ## API Endpoints
 #### Products
-- Index 
-- Show
-- Create [token required]
-- [OPTIONAL] Top 5 most popular products 
-- [OPTIONAL] Products by category (args: product category)
+- show all products: `'products/' [GET]`
+- get product by id: `'products/:id' [GET]`
+- Create (args: Product)[token required]: `'products/' [POST] (token)`
+- Delete (args: id) [token required]: `'products/  [DELETE] (token)`
 
 #### Users
-- Index [token required]
-- Show [token required]
-- Create N[token required]
+- show all users [token required]: `'users/' [GET] (token)`
+- get user by id [token required]: `'users/:id' [GET] (token)`
+- Create (args: User): `'register/' [POST]`
+- login (args: id, password): `'login/' [Post]`
+- Delete (args: id) [token required]: `'users/' [DELETE] (token)`
 
 #### Orders
-- Current Order by user (args: user id)[token required]
-- [OPTIONAL] Completed Orders by user (args: user id)[token required]
+- show all orders [token required]: `'orders:user_id' [GET] (token)`
+- Current Order by user [token required]: `'orders/current:userId' [GET] (token)`
+- Completed Orders by user [token required]: `'orders/completed:userId' [GET] (token)`
+- Active Orders by user [token required]: `'orders/active:userId' [GET] (token)`
+- Create Order (args: Order) [token required]: `'orders' [Post] (token)`
+- Update order's status (args: status) [token required]: `'orders:id' [PUT] (token)`
+- Delete (args: id) [token required]: `'orders/' [DELETE] (token)`
 
 ## Data Shapes
 #### Product
 -  id
 - name
 - price
-- [OPTIONAL] category
 
+```
+Table: Product (id:serial[primary key], name:varchar(50)[not null], price:numeric[not null])
+```
 #### User
 - id
 - firstName
-- lastName
+- secondname
 - password
 
+```
+Table: User (id:serial[primary key], firstName:varchar(50)[not null], secondname:varchar(50)[not null], password:varchar(60)[not null])
+```
 #### Orders
 - id
 - id of each product in the order
@@ -40,3 +51,6 @@ These are the notes from a meeting with the frontend developer that describe wha
 - user_id
 - status of order (active or complete)
 
+```
+Table: Orders (id:serial[primary key], product_id:integer(foreign key to products table), quantity:integer[default 1], user_id:integer(foreign key to users table), status:enum(active, complete)[not null])
+```

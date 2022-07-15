@@ -1,0 +1,9 @@
+{
+  "defaultEnv": { "ENV": "NODE_ENV" },
+  "dev": {
+    "driver": "pg",
+    "host": { "ENV": "host" },
+    "database": { "ENV": "database" },
+    "user": { "ENV": "user" }
+  }
+}
