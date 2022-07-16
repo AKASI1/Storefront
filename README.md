@@ -47,6 +47,12 @@ $ \c storefront
 $ \q
 ```
 
+#### Migration script for `test` database
+
+```shell
+$ npm run test
+```
+
 #### Migration script for `dev` database
 
 ```shell
@@ -66,6 +72,9 @@ NODE_ENV=dev
 host=localhost
 database=storefront
 user=postgres
+
+# database for testing
+test_db=storefront_test
 
 # password encryption
 salt=10

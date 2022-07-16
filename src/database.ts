@@ -3,7 +3,8 @@ import { Pool } from "pg";
 
 const db = new Pool({
   host: process.env.host,
-  database: process.env.database,
+  database:
+    process.env.NODE_ENV === "dev" ? process.env.database : process.env.test_db,
   user: process.env.user,
 });
 

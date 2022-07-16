@@ -5,8 +5,8 @@
   "main": "server.ts",
   "scripts": {
     "start": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"node ./dist/server.js\"",
-    "test": "jasmine-ts",
     "tsc": "tsc",
+    "test": "db-migrate db:create storefront_test && db-migrate --env test up && ENV=test jasmine-ts && db-migrate --env test down && db-migrate db:drop storefront_test",
     "dev": "db-migrate up && jasmine-ts && db-migrate down"
   },
   "author": "Udacity",
