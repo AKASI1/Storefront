@@ -1,6 +1,6 @@
-import { Application, Request, Response } from "express";
-import verifyAuthToken from "../middlewares/verifyAuthToken";
-import Product from "../models/product.model";
+import { Application, Request, Response } from 'express';
+import verifyAuthToken from '../middlewares/verifyAuthToken';
+import Product from '../models/product.model';
 
 const product = new Product();
 
@@ -15,22 +15,26 @@ const showProducts = async (_req: Request, res: Response) => {
 };
 
 const getProduct = async (req: Request, res: Response) => {
-  const products = await product.getProduct(req.params.productName);
+  const products = await product.getProduct(parseInt(req.params.id));
   res.json(products);
 };
 
 const deleteProduct = async (req: Request, res: Response) => {
-  const products = await product.deleteProduct(req.body.id);
+  const products = await product.deleteProduct(
+    parseInt(req.params.id),
+  );
   res.json(products);
 };
 
 const productRoutes = (app: Application) => {
   app
-    .route("/products")
+    .route('/products')
     .get(showProducts)
-    .post(verifyAuthToken, createProduct)
+    .post(verifyAuthToken, createProduct);
+  app
+    .route('/products/:id')
+    .get(getProduct)
     .delete(verifyAuthToken, deleteProduct);
-  app.get("/products:productName", getProduct);
 };
 
 export default productRoutes;

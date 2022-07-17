@@ -30,7 +30,7 @@ describe("User Handler", () => {
 
   it("should return success for READ user by id", async () => {
     const response = await request
-      .get("/users2")
+      .get("/users/1")
       .auth(token, { type: "bearer" });
 
     expect(response.status).toBe(200);
@@ -39,7 +39,7 @@ describe("User Handler", () => {
 
   it("should return success for LOGIN user", async () => {
     const response = await request.post("/login").send({
-      id: 2,
+      id: 1,
       password: userInstance.password,
     });
 
@@ -49,8 +49,7 @@ describe("User Handler", () => {
 
   it("should return success for DELETE user by id", async () => {
     const response = await request
-      .delete("/users")
-      .send({ id: 2 })
+      .delete("/users/1")
       .auth(token, { type: "bearer" });
 
     expect(response.status).toBe(200);

@@ -1,8 +1,13 @@
-import { Application, NextFunction, Request, Response } from "express";
-import User from "../models/user.model";
-import jwt from "jsonwebtoken";
-import "dotenv/config";
-import verifyAuthToken from "../middlewares/verifyAuthToken";
+import {
+  Application,
+  NextFunction,
+  Request,
+  Response,
+} from 'express';
+import User from '../models/user.model';
+import jwt from 'jsonwebtoken';
+import 'dotenv/config';
+import verifyAuthToken from '../middlewares/verifyAuthToken';
 
 const user = new User();
 
@@ -22,21 +27,28 @@ const getUser = async (req: Request, res: Response) => {
 };
 
 const deleteUser = async (req: Request, res: Response) => {
-  const users = await user.deleteUser(req.body.id);
+  const users = await user.deleteUser(parseInt(req.params.id));
   res.json(users);
 };
 
-const login = async (req: Request, res: Response, next: NextFunction) => {
+const login = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const { id, password } = req.body;
 
     const userInfo = await user.authenticateUser(id, password);
 
     if (userInfo) {
-      const token = jwt.sign({ userInfo }, process.env.JWT_SECRET as string);
-      res.header("auth-token", token).send({ token });
+      const token = jwt.sign(
+        { userInfo },
+        process.env.JWT_SECRET as string,
+      );
+      res.header('auth-token', token).send({ token });
     } else {
-      return res.status(400).send("Password is wrong");
+      return res.status(400).send('Password is wrong');
     }
   } catch (err) {
     res.status(400);
@@ -45,13 +57,13 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 const userRoutes = (app: Application) => {
+  app.get('/users', verifyAuthToken, showUsers);
   app
-    .route("/users")
-    .get(verifyAuthToken, showUsers)
+    .route('/users/:id')
+    .get(verifyAuthToken, getUser)
     .delete(verifyAuthToken, deleteUser);
-  app.get("/users:id", verifyAuthToken, getUser);
-  app.post("/register", register);
-  app.post("/login", login);
+  app.post('/register', register);
+  app.post('/login', login);
 };
 
 export default userRoutes;

@@ -1,7 +1,7 @@
 /* Replace with your SQL commands */
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
   id SERIAL PRIMARY KEY,
-  firstName VARCHAR(50),
+  firstname VARCHAR(50),
   secondname VARCHAR(50),
-  password VARCHAR(255)
+  password VARCHAR(250)
 );

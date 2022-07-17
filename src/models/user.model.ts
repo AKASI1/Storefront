@@ -16,7 +16,7 @@ type UserReturnType = {
 class User {
   table: string = "users";
 
-  async createUser(user: UserType): Promise<UserType> {
+  async createUser(user: UserType): Promise<UserReturnType> {
     try {
       const salt = await bcrypt.genSalt(parseInt(process.env.salt as string));
       const hashedPass: string = bcrypt.hashSync(

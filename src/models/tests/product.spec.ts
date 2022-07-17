@@ -22,28 +22,28 @@ describe("Product Model", () => {
       price: 645,
     });
     expect(result).toEqual({
-      id: 2,
+      id: 1,
       name: "iPhone",
       price: 645,
     });
   });
   it("should return a list of products using getProducts", async () => {
     const result = await product.showProducts();
-    expect(result.length).toEqual(2);
+    expect(result.length).toEqual(1);
   });
 
   it("should return the correct product using getProductByName", async () => {
-    const result = await product.getProduct("iPhone");
+    const result = await product.getProduct(1);
     expect(result).toEqual({
-      id: 2,
+      id: 1,
       name: "iPhone",
       price: 645,
     });
   });
   it("should delete the correct product using deleteProduct", async () => {
-    const result = await product.deleteProduct(2);
+    const result = await product.deleteProduct(1);
     expect(result).toEqual({
-      id: 2,
+      id: 1,
       name: "iPhone",
       price: 645,
     });

@@ -27,18 +27,18 @@ describe("User Model", () => {
   });
   it("should return all users using showUsers method", async () => {
     const result = await user.showUsers();
-    expect(result).toHaveSize(2);
+    expect(result).toHaveSize(1);
   });
 
   it("should return the correct user using getUserById method", async () => {
-    const id: number = 2;
+    const id: number = 1;
     const result = await user.getUser(id);
     expect(result.id).toEqual(id);
     expect(result.firstname).toEqual("kevin");
     expect(result.secondname).toEqual("eyong");
   });
   it("should delete the correct user using deleteUser method", async () => {
-    const result = await user.deleteUser(2);
-    expect(result.id).toEqual(2);
+    const result = await user.deleteUser(1);
+    expect(result.id).toEqual(1);
   });
 });
