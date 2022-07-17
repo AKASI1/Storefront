@@ -4,12 +4,14 @@
     "driver": "pg",
     "host": { "ENV": "host" },
     "database": { "ENV": "database" },
-    "user": { "ENV": "user" }
+    "user": { "ENV": "user" },
+    "password": { "ENV": "password" }
   },
   "test": {
     "driver": "pg",
     "host": { "ENV": "host" },
     "database": { "ENV": "test_db" },
-    "user": { "ENV": "user" }
+    "user": { "ENV": "user" },
+    "password": { "ENV": "password" }
   }
 }
