@@ -72,6 +72,7 @@ NODE_ENV=dev
 host=localhost
 database=storefront
 user=postgres
+password=password123
 
 # database for testing
 test_db=storefront_test
@@ -90,4 +91,4 @@ Please check the `REQUIREMENTS.md` file.
 
 #### Contributor
 
-Trung Vo ([trunglive](https://github.com/AKASI1))
+Trung Vo ([AKASI](https://github.com/AKASI1))
