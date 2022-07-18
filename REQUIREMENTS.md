@@ -18,39 +18,45 @@ These are the notes from a meeting with the frontend developer that describe wha
 - Delete (args: id) [token required]: `'users/' [DELETE] (token)`
 
 #### Orders
-- show all orders [token required]: `'orders:user_id' [GET] (token)`
-- Current Order by user [token required]: `'orders/current:userId' [GET] (token)`
-- Completed Orders by user [token required]: `'orders/completed:userId' [GET] (token)`
-- Active Orders by user [token required]: `'orders/active:userId' [GET] (token)`
-- Create Order (args: Order) [token required]: `'orders' [Post] (token)`
-- Update order's status (args: status) [token required]: `'orders:id' [PUT] (token)`
-- Delete (args: id) [token required]: `'orders/' [DELETE] (token)`
+- Show All User Orders [token required]: `'orders/:userId' [GET] (token)`
+- Completed User Orders [token required]: `'orders/completed/:userId' [GET] (token)`
+- Active User Orders [token required]: `'orders/active/:userId' [GET] (token)`
+- Create Order (args: Order) [token required]: `'order/' [Post] (token)`
+- Show Order [token required]: `'order/:id' [POST] (token)`
+- Update Order (args: Order) [token required]: `'order/:id' [PUT] (token)`
+- Delete [token required]: `'order/:id' [DELETE] (token)`
 
 ## Data Shapes
-#### Product
+#### products
 -  id
 - name
 - price
 
 ```
-Table: Product (id:serial[primary key], name:varchar(50)[not null], price:numeric[not null])
+Table: products (id:serial[primary key], name:varchar(50)[not null], price:numeric[not null])
 ```
-#### User
+#### users
 - id
 - firstName
 - secondname
 - password
 
 ```
-Table: User (id:serial[primary key], firstName:varchar(50)[not null], secondname:varchar(50)[not null], password:varchar(60)[not null])
+Table: users (id:serial[primary key], firstname:varchar(50)[not null], secondname:varchar(50)[not null], password:varchar(60)[not null])
 ```
-#### Orders
+#### orders
 - id
-- id of each product in the order
-- quantity of each product in the order
 - user_id
 - status of order (active or complete)
 
 ```
-Table: Orders (id:serial[primary key], product_id:integer(foreign key to products table), quantity:integer[default 1], user_id:integer(foreign key to users table), status:enum(active, complete)[not null])
+Table: orders (id:serial[primary key], user_id:integer(foreign key to users table), status:enum(active, complete)[not null])
+```
+#### order_products
+- id
+- product_id
+- quantity
+
+```
+Table: order_products (id:serial[primary key], order_id:integer(foreign key to orders table), product_id:integer(foreign key to products table), quantity:integer)
 ```
