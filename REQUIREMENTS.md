@@ -25,6 +25,9 @@ These are the notes from a meeting with the frontend developer that describe wha
 - Show Order [token required]: `'order/:id' [POST] (token)`
 - Update Order (args: Order) [token required]: `'order/:id' [PUT] (token)`
 - Delete [token required]: `'order/:id' [DELETE] (token)`
+- Add Products (args: Products[]) [token required]: `'order/:id/products' [POST] (token)`
+- Get Products [token required]: `'order/:id/products' [GET] (token)`
+- Delete Products [token required]: `'orderProduct/:id' [DELETE] (token)`
 
 ## Data Shapes
 #### products
@@ -54,6 +57,7 @@ Table: orders (id:serial[primary key], user_id:integer(foreign key to users tabl
 ```
 #### order_products
 - id
+- order_id
 - product_id
 - quantity
 
